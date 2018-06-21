@@ -1,0 +1,92 @@
+
+      body {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        background-color: #607D8B;
+        margin-top: 15px;
+        font-size: 0.8em;
+      }
+      body a {
+        color: white;
+      }
+      
+      li {
+        list-style: none;
+      }
+      
+      .main {
+        width: 1140px;
+        display: flex;
+        justify-content: space-between;
+        background-color: #455A64;
+        color: #FFFFFF;
+        font-size: 0.9em;
+        flex-wrap: wrap;
+        padding: 15px;
+        margin-bottom: 10px;
+      }
+      
+      .zoom {
+        display: flex;
+        width: 555px;
+        font-size: 1em;
+      }
+      .zoom button {
+        border: 0px;
+        font-size: 0.9em;
+        background-color: #212121;
+        color: white;
+      }
+      .zoom li {
+        padding-right: 5px;
+      }
+      
+      .date {
+        display: flex;
+        width: 555px;
+        justify-content: flex-end;
+        font-size: 1em;
+      }
+      .date input {
+        border: 0px;
+        font-size: 0.9em;
+        background-color: #212121;
+        color: white;
+        width: 75px;
+        text-align: center;
+      }
+      .date li {
+        padding-right: 8px;
+      }
+      .date li:last-child {
+        padding-right: 0px;
+      }
+      
+      .chart {
+        width: 100%;
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+      }
+      
+      .stocks {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+      
+      .stock-box {
+        width: 352px;
+        background-color: #448AFF;
+        padding: 0.8em;
+        border-left: 3px solid white;
+        margin-bottom: 10px;
+      }
+      .stock-box p {
+        font-size: 1.2em;
+      }
+      
+          
