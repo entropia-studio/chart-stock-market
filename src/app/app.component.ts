@@ -12,7 +12,7 @@ export class AppComponent implements OnInit{
   title = 'app';
 
   constructor(
-    private charStocks: ChartStocks
+    //private charStocks: ChartStocks
     //private chartStockService: ChartStocksService    
   ) {}
 
