@@ -9,21 +9,22 @@ import {ChartStocks} from './chart-stocks';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
-
+  title = 'app';  
+  jsonResponse: Object;
   constructor(
-    //private charStocks: ChartStocks
-    //private chartStockService: ChartStocksService    
+   // private charStocks: ChartStocks,
+    private chartStockService: ChartStocksService    
   ) {}
 
   ngOnInit(){
-    /*
-    const json = this.chartStockService.stocksSearchValues()
+    
+    this.chartStockService.stocksSearchValues(["GOOGL"],"ytd")
     .subscribe(chartData => {
-      console.log(chartData);
+      this.jsonResponse = JSON.stringify(chartData);
+      console.log(chartData["GOOGL"].quote.companyName);
      }     
     );
-    */
+    
    console.log('hi');
     
   }
