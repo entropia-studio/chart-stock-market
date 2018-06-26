@@ -24,7 +24,7 @@ function connect(){
   function addCompany(req,res){        
     return new Promise((resolve,reject) => {
       try{  
-        const companyCode = req.companyCode;
+        const companyCode = req.code;
         const urlStocksApi = 'https://api.iextrading.com/1.0/stock/'+ companyCode +'/batch?types=quote';        
         console.log("urlStocksApi",urlStocksApi)
         // Call the api to check if the company exists

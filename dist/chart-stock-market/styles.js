@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/html/freecodecamp/angular/chart-stock-market/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /Users/entropia/Sites/freecodecamp/chart-stock-market/src/styles.css */"./src/styles.css");
 
 
 /***/ })

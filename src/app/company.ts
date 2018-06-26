@@ -1,6 +1,6 @@
-export interface Company {    
-    "_id" : string,
-    "name": string,
-    "code": string
+export class Company {    
+    "_id" : string;
+    "name": string;
+    "code": string;
 }
 

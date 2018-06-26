@@ -51,7 +51,7 @@ app.post('/api/company/add',(req,response) => {
 
 app.delete('/api/company/delete/:codeCompany',(req,response) => {
     try{        
-        datastore.deleteCompany(req.params.companyCode)
+        datastore.deleteCompany(req.params.codeCompany)
             .then(res => {
                 response.json(res);                        
             },error => {
@@ -62,11 +62,12 @@ app.delete('/api/company/delete/:codeCompany',(req,response) => {
     }
 })
 
-
+/*
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/chart-stock-market/index.html'));
 });
+*/
 
 
 // Start the app by listening on the default Heroku port
