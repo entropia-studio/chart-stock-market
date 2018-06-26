@@ -1,10 +1,6 @@
 require('dotenv').config();
+const request = require('request');
 const mongoose = require('mongoose');
-
-var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-                useMongoClient: true,
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };  
-
 
 var MONGODB_URI = 'mongodb://'+process.env.USER_DB+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.DB_PORT+'/'+process.env.DB;
 
@@ -18,34 +14,60 @@ const Company = mongoose.model('Company',companyStockSchema);
 function connect(){
     return new Promise((resolve,reject) => {
       try{
-        mongoose.connect(MONGODB_URI,options);
+        mongoose.connect(MONGODB_URI);
       }catch(e){
         reject(new DataStoreUnknowException("connect",null,e))
       }
     })
   }
 
-  function addCompany(response){
+  function addCompany(req,res){        
     return new Promise((resolve,reject) => {
-      try{
-        const companyCode = response.quote.symbol;
-        const companyName = response.quote.companyName;
-        companyExists(companyCode).then(response => {
-          if (exists) reject(new DataStoreFieldValidationException(companyCode,"Company code already exists"))
-          let company = new Company(
-                            {
-                             name: companyName,
-                             code: companyCode                             
-                            })
-        
-          company.save((error, result) => {
-            if (error) reject (new DataStoreUnknowException("insert",companyCode,error))
-            resolve(result);
-          })
-        })    
-        
+      try{  
+        const companyCode = req.companyCode;
+        const urlStocksApi = 'https://api.iextrading.com/1.0/stock/'+ companyCode +'/batch?types=quote';        
+        console.log("urlStocksApi",urlStocksApi)
+        // Call the api to check if the company exists
+        request(urlStocksApi, { json: true }, (err, res, body) => {
+          if (err) { reject(new DataStoreUnknowException('GET',args,"Invalida API call"))}
+          
+          // If exists
+          if (res.statusCode !== 404){                
+            const companyName = res.body.quote.companyName;
+            companyExists(companyCode).then(exists => {
+              if (exists) reject(new DataStoreFieldValidationException(companyCode,`Company ${companyCode} code already exists`))
+              let company = new Company(
+                                {
+                                 name: companyName,
+                                 code: companyCode                             
+                                })
+            
+              company.save((error, result) => {
+                if (error) reject (new DataStoreUnknowException("insert",companyCode,error))
+                resolve(result);
+              })
+            })    
+          }else{ // Company doesn't exist       
+            reject(new DataStoreFieldValidationException(companyCode,`Company ${companyCode} code doesn't exist`))
+          }              
+        });        
       }catch(e){
         reject(new DataStoreUnknowException("insert",companyCode,e));
+      }
+    })
+  }
+
+  function deleteCompany(companyCode){
+    return new Promise((resolve,reject) => {
+      try{        
+        Company.deleteOne({code: companyCode})
+            .exec((error,result) => {            
+               if (error) reject(error);
+               resolve({'log' : `Company ${companyCode} deleted`});
+            }
+        )
+      }catch(e){
+        reject(new DataStoreUnknowException("delete",companyCode,e));
       }
     })
   }
@@ -83,7 +105,7 @@ function connect(){
 
   // Exception objects
 
-function DataStoreUnknowException (method,args,error) {
+  function DataStoreUnknowException (method,args,error) {
     this.type = this.constructor.name;
     this.description = 'Error happening during operation: ' + method;
     this.method = method;
@@ -96,8 +118,10 @@ function DataStoreUnknowException (method,args,error) {
     this.error = error;
   }
 
+
   module.exports = {
     connect,
     addCompany,    
-    getStocks
+    getStocks,
+    deleteCompany
   }

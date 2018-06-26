@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChartStocksService} from './chart-stocks.service';
 import {ChartStocks} from './chart-stocks';
+import {Company} from './company';
 
 
 @Component({
@@ -11,6 +12,7 @@ import {ChartStocks} from './chart-stocks';
 export class AppComponent implements OnInit{
   title = 'app';  
   jsonResponse: Object;
+  companies: Array<Company>;
   constructor(
    // private charStocks: ChartStocks,
     private chartStockService: ChartStocksService    
@@ -18,15 +20,26 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     
+    this.chartStockService.getCompanies()
+    .subscribe(companies => {      
+      this.companies = companies;
+    })
+
+    /*
     this.chartStockService.stocksSearchValues(["GOOGL"],"ytd")
     .subscribe(chartData => {
-      this.jsonResponse = JSON.stringify(chartData);
+      //this.jsonResponse = JSON.stringify(chartData);
       console.log(chartData["GOOGL"].quote.companyName);
      }     
     );
-    
-   console.log('hi');
-    
+    */    
   }
+
+  
+  deleteCompany(codeCompany){    
+    this.chartStockService.deleteCompany(codeCompany)
+    .subscribe();    
+  }
+  
   
 }

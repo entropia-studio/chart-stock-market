@@ -2,10 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 
+// Avoid CORS problems
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods","GET, DELETE, OPTIONS")
+    next();
+});
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
-require('dotenv').config();
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/chart-stock-market'));
@@ -30,28 +36,37 @@ app.get('/api/stocks',(req,res) => {
 })
 
 
-app.post('/api/company/add',(request,response) => {
-    try{
-        let urlStocksApi = 'https://api.iextrading.com/1.0/stock/'+ request.body.companyCode +'/batch?types=quote';
-        app.get(urlStocksApi,(req,res) => {
-            if (res.statusCode !== 404){
-                datastore.addCompany(res)
-                    .then(response => {
-                        console.log(response);
-                    });    
-            }            
-        })        
+app.post('/api/company/add',(req,response) => {
+    try{        
+        datastore.addCompany(req.body,response)
+            .then(res => {
+                response.json(res);                        
+            },error => {
+                handleError(error,response);
+            });       
     }catch(e){
-        handleError(e,res);
+        handleError(e,response);
     }
 })
 
-/*
+app.delete('/api/company/delete/:codeCompany',(req,response) => {
+    try{        
+        datastore.deleteCompany(req.params.companyCode)
+            .then(res => {
+                response.json(res);                        
+            },error => {
+                handleError(error,response);
+            });       
+    }catch(e){
+        handleError(e,response);
+    }
+})
+
+
 app.get('/*', function(req,res) {
     
 res.sendFile(path.join(__dirname+'/dist/chart-stock-market/index.html'));
 });
-*/
 
 
 // Start the app by listening on the default Heroku port

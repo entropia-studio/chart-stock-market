@@ -12,36 +12,18 @@
   </div>  
   <div class="chart" id="chart_div"></div>
   <div class="stocks">
+    <mat-card class="stock-box" *ngFor="let company of companies">
+        <mat-card-title>{{company.code}}</mat-card-title>
+        <mat-card-content>{{company.name}}</mat-card-content>
+        <mat-card-actions><button mat-button (click)="deleteCompany(company.code)">REMOVE</button></mat-card-actions>
+    </mat-card>  
     <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>
-    <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>
-    <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>
-    <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>
-    <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>
-    <mat-card class="stock-box">
-        <mat-card-title>GE</mat-card-title>
-        <mat-card-content>General Electric Co (GE) Prices, Dividends, Splits and Trading Volume</mat-card-content>
-        <mat-card-actions><button mat-button>REMOVE</button></mat-card-actions>
-    </mat-card>   
+      <mat-card-title>Syncs in realtime across clients</mat-card-title>
+      <mat-card-content>        
+          <input matInput name="codeCompany" value="Sushi" type="text">        
+      </mat-card-content>
+      <mat-card-actions><button mat-button (click)="addCompany()">ADD</button></mat-card-actions>
+  </mat-card>  
   </div>
 </div>
 <a href="https://github.com/entropia-studio/" target="_blank">Coded by Entropia Studio</a>
