@@ -10,7 +10,9 @@
     <li><button>1Y</button></li>
     <li><button>ALL</button></li>    
   </div>  
-  <div class="chart" id="chart_div"></div>
+  <div class="chart" id="chart_div">
+    <app-dashboard [companies]="companies"></app-dashboard>
+  </div>
   <div class="stocks">
     <mat-card class="stock-box" *ngFor="let company of companies">
         <mat-card-title>{{company.code}}</mat-card-title>

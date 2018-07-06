@@ -4,7 +4,7 @@ import { WebsocketService } from './websocket.service';
 import { catchError, map } from "rxjs/operators";
 import { of } from "rxjs";
 
-const CHAT_URL = 'ws://localhost:8080/';
+const SOCKET_URL = 'ws://localhost:4300/';
 
 export interface Message {
 	action: string,	
@@ -13,18 +13,17 @@ export interface Message {
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class SocketBroadcastService {
 
   public messages: Subject<Message>;
 
   constructor(wsService: WebsocketService) {
 		
 		this.messages = <Subject<Message>>wsService
-			.connect(CHAT_URL)  
+      .connect(SOCKET_URL)        
 			.pipe(				
 				map((response: MessageEvent): Message => {
-					let data = JSON.parse(response.data);
-					console.log("data ",data);
+					let data = JSON.parse(response.data);					
 					return {
 						action: data.action
 					}
