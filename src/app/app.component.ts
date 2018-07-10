@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ChartStocksService} from './chart-stocks.service';
-import {ChartStocks} from './chart-stocks';
+
 import {Company} from './company';
 import {SocketBroadcastService} from './socket-broadcast.service';
+
+
 
 
 @Component({
@@ -16,40 +18,27 @@ export class AppComponent implements OnInit{
   title = 'app';  
   jsonResponse: Object;
   companies: Company[];
-  company: Company = new Company;
+  company: Company = new Company; 
+  period: string = "1M";
 
-  companies1: [] = ["GE","FB"];
   
-  constructor(
-   // private charStocks: ChartStocks,
+  constructor(       
     private chartStocksService: ChartStocksService,
     private socketBroadcastService: SocketBroadcastService   
   ) {
     socketBroadcastService.messages.subscribe((msg) => {
-      this.getCompanies();
-      console.log("msg",msg);
+      this.getCompanies();      
     });
   }
 
   ngOnInit() : void{    
-    this.getCompanies();   
-
-    
-    /*
-    this.chartStockService.stocksSearchValues(["GOOGL"],"ytd")
-    .subscribe(chartData => {
-      //this.jsonResponse = JSON.stringify(chartData);
-      console.log(chartData["GOOGL"].quote.companyName);
-     }     
-    );
-    */    
+    this.getCompanies();        
   }
 
   getCompanies() : void {
     this.chartStocksService.getCompanies()
       .subscribe( companies => {
-        this.companies = companies;     
-        console.log("Companies",this.companies);   
+        this.companies = companies;                     
       }
     )
   }
@@ -72,6 +61,9 @@ export class AppComponent implements OnInit{
       this.socketBroadcastService.messages.next({"action": "delete"});
     });    
   }
-  
-  
+  setPeriod(period: string):void {
+    this.period = period;
+  } 
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChange } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 import { GoogleLineChartService } from '../google-line-chart.service';
 import { LineChartConfig } from '../line-char-config-class';
@@ -11,7 +11,7 @@ declare var google: any;
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css'],  
 })
-export class LineChartComponent implements OnInit, OnChange {
+export class LineChartComponent implements OnInit, OnChanges {
 
   @Input() data: any[];
   @Input() config: LineChartConfig;

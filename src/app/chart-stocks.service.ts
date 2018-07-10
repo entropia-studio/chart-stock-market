@@ -28,8 +28,8 @@ export class ChartStocksService {
   }
 
   stocksSearchValues = (symbols: Array<String>, range: String): Observable<ChartStocks> => {
-    this.urlApiStocks += "&symbols= " + symbols.join() + "&range=" + range;    
-    return this.http.get<ChartStocks>(this.urlApiStocks);           
+    const mUrl = this.urlApiStocks + "&symbols= " + symbols.join() + "&range=" + range;      
+    return this.http.get<ChartStocks>(mUrl);           
   }
 
   deleteCompany = (company: Company) : Observable<Company> => {    
@@ -41,8 +41,7 @@ export class ChartStocksService {
   }
 
   addCompany = (company: Company) : Observable<Company> => {
-    const mUrl = this.urlApiCompanies + '/company/add';    
-    console.log(company);
+    const mUrl = this.urlApiCompanies + '/company/add';        
     return this.http.post<Company>(mUrl,company,httpOptions);
   }
 

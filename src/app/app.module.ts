@@ -11,6 +11,9 @@ import {GoogleChartBaseService} from './google-chart-base.service';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {GoogleLineChartService} from './google-line-chart.service';
+import {MatSliderModule} from '@angular/material/slider';
+
+
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import {GoogleLineChartService} from './google-line-chart.service';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule,    
+    MatFormFieldModule,   
+    MatSliderModule 
   ],
   providers: [ChartStocksService,
               GoogleChartBaseService,

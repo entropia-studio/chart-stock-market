@@ -1,31 +1,33 @@
-{{jsonResponse}}
 <div class="main">
   <span style="width: 100%;text-align: center">STOCKS</span>
   <div class="zoom">
     <li>ZOOM</li>
-    <li><button>1M</button></li>
-    <li><button>3M</button></li>
-    <li><button>6M</button></li>
-    <li><button>YTD</button></li>
-    <li><button>1Y</button></li>
-    <li><button>ALL</button></li>    
-  </div>  
-  <div class="chart" id="chart_div">
-    <app-dashboard [companies]="companies"></app-dashboard>
+    <li><button (click)="setPeriod('1M')">1M</button></li>
+    <li><button (click)="setPeriod('3M')">3M</button></li>
+    <li><button (click)="setPeriod('6M')">6M</button></li>
+    <li><button (click)="setPeriod('YTD')">YTD</button></li>
+    <li><button (click)="setPeriod('1Y')">1Y</button></li>
+    <li><button (click)="setPeriod('2Y')">2Y</button></li>    
+    <li><button (click)="setPeriod('5Y')">5Y</button></li>    
+  </div>    
+  <div class="chart" id="chart_div" >
+    <app-dashboard [companies]="companies" [period]="period" *ngIf="companies"  ></app-dashboard>
   </div>
   <div class="stocks">
     <mat-card class="stock-box" *ngFor="let company of companies">
         <mat-card-title>{{company.code}}</mat-card-title>
         <mat-card-content>{{company.name}}</mat-card-content>
-        <mat-card-actions><button mat-button (click)="deleteCompany(company)">REMOVE</button></mat-card-actions>
+        <button mat-raised-button color="primary" (click)="deleteCompany(company)">REMOVE</button>
     </mat-card>  
     <mat-card class="stock-box">
       <mat-card-title>Syncs in realtime across clients</mat-card-title>
       <mat-card-content> 
           <input #companyCode />                  
       </mat-card-content>
-      <mat-card-actions><button mat-button (click)="addCompany(companyCode.value);companyCode.value=''">ADD</button></mat-card-actions>
+      <button mat-raised-button color="accent" (click)="addCompany(companyCode.value);companyCode.value=''">ADD</button>
   </mat-card>  
   </div>
 </div>
+<div class="footer">
 <a href="https://github.com/entropia-studio/" target="_blank">Coded by Entropia Studio</a>
+</div>

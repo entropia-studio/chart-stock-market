@@ -1,8 +1,9 @@
 <div class="divTable">
     <div class="divTableBody">
         <div class="divTableRow">            
-            <div class="divTableCell"><app-line-chart [data]="data1" [config]="config1" [elementId]="elementId1"></app-line-chart></div>                        
-            
+            <div class="divTableCell" *ngIf="data1">
+                <app-line-chart [data]="data1" [config]="config1" [elementId]="elementId1"></app-line-chart>
+            </div>                                    
         </div>
     </div>
 </div>
