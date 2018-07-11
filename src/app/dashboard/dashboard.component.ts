@@ -42,7 +42,8 @@ export class DashboardComponent implements OnChanges {
             // Chart data for this company
             const chart = data[code].chart;
             
-            chart.map((stock,i) => {
+            chart.map((stock,i) => {             
+
               if (index == 0){
                 mData.push([new Date(stock.date),stock.vwap]);
               }else{
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnChanges {
           })
           
           this.data1 = mData;
-          this.config1 = new LineChartConfig('Stocks value in $', "VWAP value");
+          this.config1 = new LineChartConfig('Stocks value', "VWAP value");
           this.elementId1 = 'stocksLineChart';     
         });    
   }

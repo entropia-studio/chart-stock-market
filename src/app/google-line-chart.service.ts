@@ -15,7 +15,9 @@ export class GoogleLineChartService extends GoogleChartBaseService{
   }
 
   public BuildLineChart(elementId: string, data: any[], config: LineChartConfig) : void {  
-    var chartFunc = () => { return new google.visualization.LineChart(document.getElementById(elementId)); };
+    var chartFunc = () => {       
+      return new google.visualization.LineChart(document.getElementById(elementId));
+    };
     var options = {                     
             title: config.title,
             subtitle: config.subtitle,
@@ -24,23 +26,23 @@ export class GoogleLineChartService extends GoogleChartBaseService{
             hAxis: {
               textStyle: {                
                 color: '#FFFFFF',
-                fontSize: 12,
+                fontSize: 12,                
               },              
             },
             vAxis: {
               textStyle: {                
                 color: '#FFFFFF',
-                fontSize: 12,
-              }
+                fontSize: 12,                
+              },
+              format:'# $'
             },
             titleTextStyle: {
               color: '#FFFFFF',
-              fontSize: 12,
+              fontSize: 12,              
             },
-            
-            
-      };
-
+            tooltip: {isHtml: true},
+      };    
+    
     this.buildChart(data, chartFunc, options);
   }
 

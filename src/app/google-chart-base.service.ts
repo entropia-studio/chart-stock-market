@@ -21,6 +21,7 @@ export class GoogleChartBaseService {
       chartFunc().draw(datatable, options);
     };   
     var callback = () => func(chartFunc, options);
+    
     google.charts.setOnLoadCallback(callback);
   }
 }
