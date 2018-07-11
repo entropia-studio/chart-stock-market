@@ -2,13 +2,13 @@
   <span style="width: 100%;text-align: center">STOCKS</span>
   <div class="zoom">
     <li>ZOOM</li>
-    <li><button (click)="setPeriod('1M')">1M</button></li>
-    <li><button (click)="setPeriod('3M')">3M</button></li>
-    <li><button (click)="setPeriod('6M')">6M</button></li>
-    <li><button (click)="setPeriod('YTD')">YTD</button></li>
-    <li><button (click)="setPeriod('1Y')">1Y</button></li>
-    <li><button (click)="setPeriod('2Y')">2Y</button></li>    
-    <li><button (click)="setPeriod('5Y')">5Y</button></li>    
+    <li><button (click)="setPeriod('1M')" [class.btn-selected]="period == '1M'">1M</button></li>
+    <li><button (click)="setPeriod('3M')" [class.btn-selected]="period == '3M'">3M</button></li>
+    <li><button (click)="setPeriod('6M')" [class.btn-selected]="period == '6M'">6M</button></li>
+    <li><button (click)="setPeriod('YTD')" [class.btn-selected]="period == 'YTD'">YTD</button></li>
+    <li><button (click)="setPeriod('1Y')" [class.btn-selected]="period == '1Y'">1Y</button></li>
+    <li><button (click)="setPeriod('2Y')" [class.btn-selected]="period == '2Y'">2Y</button></li>    
+    <li><button (click)="setPeriod('5Y')" [class.btn-selected]="period == '5Y'">5Y</button></li>    
   </div>    
   <div class="chart" id="chart_div" >
     <app-dashboard [companies]="companies" [period]="period" *ngIf="companies"  ></app-dashboard>

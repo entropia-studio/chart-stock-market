@@ -14,9 +14,7 @@ import {SocketBroadcastService} from './socket-broadcast.service';
   providers: [SocketBroadcastService]
   
 })
-export class AppComponent implements OnInit{
-  title = 'app';  
-  jsonResponse: Object;
+export class AppComponent implements OnInit{    
   companies: Company[];
   company: Company = new Company; 
   period: string = "1M";

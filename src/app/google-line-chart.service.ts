@@ -16,9 +16,29 @@ export class GoogleLineChartService extends GoogleChartBaseService{
 
   public BuildLineChart(elementId: string, data: any[], config: LineChartConfig) : void {  
     var chartFunc = () => { return new google.visualization.LineChart(document.getElementById(elementId)); };
-    var options = {
+    var options = {                     
             title: config.title,
-            legend: config.legend,
+            subtitle: config.subtitle,
+            backgroundColor: '#607D8B',
+            fontName: 'Roboto',            
+            hAxis: {
+              textStyle: {                
+                color: '#FFFFFF',
+                fontSize: 12,
+              },              
+            },
+            vAxis: {
+              textStyle: {                
+                color: '#FFFFFF',
+                fontSize: 12,
+              }
+            },
+            titleTextStyle: {
+              color: '#FFFFFF',
+              fontSize: 12,
+            },
+            
+            
       };
 
     this.buildChart(data, chartFunc, options);

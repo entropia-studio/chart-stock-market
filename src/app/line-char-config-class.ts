@@ -1,9 +1,9 @@
 export class LineChartConfig {
   title: string;
-  legend: string
+  subtitle: string
 
-  constructor(title: string, legend: string) {
+  constructor(title: string, subtitle: string) {
       this.title = title;
-      this.legend = legend;
+      this.subtitle = subtitle;
   }
 }

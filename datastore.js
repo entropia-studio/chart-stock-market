@@ -26,7 +26,7 @@ function connect(){
       try{  
         const companyCode = req.code;
         const urlStocksApi = 'https://api.iextrading.com/1.0/stock/'+ companyCode +'/batch?types=quote';        
-        console.log("urlStocksApi",urlStocksApi)
+        
         // Call the api to check if the company exists
         request(urlStocksApi, { json: true }, (err, res, body) => {
           if (err) { reject(new DataStoreUnknowException('GET',args,"Invalida API call"))}

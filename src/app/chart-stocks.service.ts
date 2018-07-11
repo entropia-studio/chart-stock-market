@@ -55,20 +55,4 @@ export class ChartStocksService {
       return of(result as T);
     };
   }
-
-  /*
-  stocksSearchValues = (symbols: Array<String>, range: String): Observable<ChartStocks> => {
-    let observable = new Observable<ChartStocks>(() => {
-      this.http.get(this.urlApi)
-      .toPromise()
-      .then((response) => {
-        return (response as ChartStocks);
-      },error => {
-        reject(error);
-      })
-    })
-    return observable;
-  }
-  */
-
 }

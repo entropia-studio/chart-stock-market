@@ -1,7 +1,7 @@
 <div class="divTable">
     <div class="divTableBody">
         <div class="divTableRow">            
-            <div class="divTableCell" *ngIf="data1">
+            <div class="divTableCell" *ngIf="data1.length > 0">
                 <app-line-chart [data]="data1" [config]="config1" [elementId]="elementId1"></app-line-chart>
             </div>                                    
         </div>

@@ -28,8 +28,7 @@ datastore.connect();
 app.get('/api/stocks',(req,res) => {    
     try{
         datastore.getStocks()
-            .then(response => {
-                console.log(response);
+            .then(response => {                
                 res.json(response);
             })
     }catch(e){

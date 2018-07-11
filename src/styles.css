@@ -18,56 +18,10 @@ body a {
     list-style: none;
   }
   
-  .main {
-    width: 1140px;
-    display: flex;
-    justify-content: space-between;
-    background-color: #455A64;
-    color: #FFFFFF;
-    font-size: 0.9em;
-    flex-wrap: wrap;
-    padding: 15px;
-    margin-bottom: 10px;
-  }
-  
-  .zoom {
-    display: flex;
-    width: 555px;
-    font-size: 1em;
-  }
-  .zoom button {
-    border: 0px;
-    font-size: 0.9em;
-    background-color: #212121;
-    color: white;
-  }
-  .zoom li {
-    padding-right: 5px;
-  }
-  
-  .chart {
-    width: 100%;
-    margin-top: 0.8em;
-    margin-bottom: 0.8em;
-  }
-  
-  .stocks {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    flex-wrap: wrap;
-  }
+ 
+
   
 
-
-  .footer{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    align-items: center;        
-    margin: 15px 0 15px 0;
-    font-size: 0.9em;
-  }
 
  
   

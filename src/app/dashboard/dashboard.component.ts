@@ -9,13 +9,10 @@ import {ChartStocksService} from '../chart-stocks.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnChanges {
+export class DashboardComponent implements OnChanges {
   
   @Input() companies: Company[];
-  @Input() period: string;
-  
-
-  title = 'Reusable line charts sample';
+  @Input() period: string; 
 
   data1: any[] = [];
   config1: LineChartConfig;
@@ -23,14 +20,8 @@ export class DashboardComponent implements OnInit, OnChanges {
 
   constructor(private chartStocksService: ChartStocksService) { }
 
-  ngOnInit():void {   
-    this.config1 = new LineChartConfig('Stocks values', "0.4");
-    this.elementId1 = 'myLineChart1';     
-  }
-
   ngOnChanges(): void {     
-    if (this.companies){      
-      console.log("companies",this.companies); 
+    if (this.companies){            
       this.setDataLineChart(this.companies);
     }      
   }
@@ -53,7 +44,7 @@ export class DashboardComponent implements OnInit, OnChanges {
             
             chart.map((stock,i) => {
               if (index == 0){
-                mData.push([stock.date,stock.vwap]);
+                mData.push([new Date(stock.date),stock.vwap]);
               }else{
                 mData[i+1].push(stock.vwap);
               }
@@ -61,8 +52,8 @@ export class DashboardComponent implements OnInit, OnChanges {
           })
           
           this.data1 = mData;
-          this.config1 = new LineChartConfig('Stocks values', "0.4");
-          this.elementId1 = 'myLineChart1';     
+          this.config1 = new LineChartConfig('Stocks value in $', "VWAP value");
+          this.elementId1 = 'stocksLineChart';     
         });    
   }
 }
