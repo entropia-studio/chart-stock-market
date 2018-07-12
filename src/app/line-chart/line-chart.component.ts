@@ -13,13 +13,13 @@ declare var google: any;
 })
 export class LineChartComponent implements OnChanges {
 
-  @Input() data: any[];
+  @Input() data: any;
   @Input() config: LineChartConfig;
   @Input() elementId: string;
 
   constructor(private _lineChartService: GoogleLineChartService) { }
   
-  ngOnChanges(): void{
+  ngOnChanges(): void{    
     this._lineChartService.BuildLineChart(this.elementId, this.data, this.config); 
   }
 

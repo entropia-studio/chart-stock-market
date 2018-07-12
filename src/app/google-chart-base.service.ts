@@ -15,13 +15,17 @@ export class GoogleChartBaseService {
 
   
 
-  protected buildChart(data: any[], chartFunc: any, options: any) : void {
-    var func = (chartFunc, options) => {
-      var datatable = google.visualization.arrayToDataTable(data);
-      chartFunc().draw(datatable, options);
+  protected buildChart(data: any, chartFunc: any, options: any) : void {        
+    var func = (chartFunc, options) => {           
+      chartFunc().draw(data, options); 
     };   
     var callback = () => func(chartFunc, options);
     
     google.charts.setOnLoadCallback(callback);
   }
+
+  public getDataTable() : any {
+    return new google.visualization.DataTable();
+  }
+
 }
