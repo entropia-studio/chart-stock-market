@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const app = express();
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 4300 });
+const path = require('path');
+
 
 
 // Avoid CORS problems
@@ -12,6 +14,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods","GET, DELETE, OPTIONS")
     next();
 });
+
+
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
@@ -64,6 +68,10 @@ app.delete('/api/company/delete/:codeCompany',(req,response) => {
         handleError(e,response);
     }
 })
+
+app.get('/*', function(req,res) {    
+    res.sendFile(path.join(__dirname+'/dist/chart-stock-market/index.html'));
+});
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
