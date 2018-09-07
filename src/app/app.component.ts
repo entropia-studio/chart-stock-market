@@ -1,35 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {ChartStocksService} from './chart-stocks.service';
-
 import {Company} from './company';
 import {SocketBroadcastService} from './socket-broadcast.service';
-
-
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [SocketBroadcastService]
+  styleUrls: ['./app.component.css'],  
   
 })
 export class AppComponent implements OnInit{    
   companies: Company[];
   company: Company = new Company; 
   period: string = "1M";
-
-  
+    
   constructor(       
     private chartStocksService: ChartStocksService,
-    private socketBroadcastService: SocketBroadcastService   
+    private socketBroadcastService: SocketBroadcastService,    
   ) {
     socketBroadcastService.messages.subscribe((msg) => {
       this.getCompanies();      
     });
   }
 
-  ngOnInit() : void{    
+  ngOnInit() : void{        
     this.getCompanies();        
   }
 

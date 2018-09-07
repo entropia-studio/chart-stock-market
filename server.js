@@ -82,14 +82,6 @@ wss.broadcast = function broadcast(data) {
     });
   };
 
-
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/chart-stock-market/index.html'));
-});
-
-
-
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
 

@@ -16,6 +16,7 @@ import {MatSliderModule} from '@angular/material/slider';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,   
-    MatSliderModule 
+    MatSliderModule,  
+
   ],
   providers: [ChartStocksService,
               GoogleChartBaseService,

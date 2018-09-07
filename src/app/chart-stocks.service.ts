@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable,throwError,of} from 'rxjs';
 import {ChartStocks} from './chart-stocks';
 import {Company} from './company';
-import { HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
@@ -11,20 +10,29 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class ChartStocksService {  
+export class ChartStocksService {    
+  
 
   urlApiStocks: string = 'https://api.iextrading.com/1.0/stock/market/batch?types=quote,chart';
-  urlApiCompanies: string = 'http://localhost:8080/api'; 
-  constructor(private http: HttpClient) { }
+  urlApiCompanies: string = location.protocol + '//localhost:8080/api';  
+
+
+  constructor(
+    private http: HttpClient,   
+  ){ }
 
   getCompanies = ():Observable<Company[]> => {    
+    
     return this.http.get<Company[]>(this.urlApiCompanies + '/stocks')
       .pipe(        
         catchError(this.handleError('getCompanies',[]))
       )
+      
   }
 
   stocksSearchValues = (symbols: Array<String>, range: String): Observable<ChartStocks> => {
