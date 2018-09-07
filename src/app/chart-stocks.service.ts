@@ -19,7 +19,7 @@ export class ChartStocksService {
   
 
   urlApiStocks: string = 'https://api.iextrading.com/1.0/stock/market/batch?types=quote,chart';
-  urlApiCompanies: string = location.protocol + '//' + location.host +' /api';  
+  urlApiCompanies: string = location.protocol + '//' + location.host +'/api';  
 
 
   constructor(
