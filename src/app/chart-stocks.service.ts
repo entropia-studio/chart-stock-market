@@ -27,7 +27,7 @@ export class ChartStocksService {
   ){ }
 
   getCompanies = ():Observable<Company[]> => {    
-    
+    console.log('Location: '+location.host);
     return this.http.get<Company[]>(this.urlApiCompanies + '/stocks')
       .pipe(        
         catchError(this.handleError('getCompanies',[]))
