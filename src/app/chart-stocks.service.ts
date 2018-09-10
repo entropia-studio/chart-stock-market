@@ -19,16 +19,19 @@ export class ChartStocksService {
   
 
   urlApiStocks: string = 'https://api.iextrading.com/1.0/stock/market/batch?types=quote,chart';
-  urlApiCompanies: string = location.protocol + '//' + location.host +'/api';  
 
 
   constructor(
     private http: HttpClient,   
   ){ }
+  
+  getUrlApiCompanies = (): string => {
+    var url_api = location.protocol + '//' + location.hostname;       
+    return location.hostname == 'localhost' ? url_api + ':8080/api'  : url_api + '/api';
+  }
 
-  getCompanies = ():Observable<Company[]> => {    
-    console.log('Location: '+location.host);
-    return this.http.get<Company[]>(this.urlApiCompanies + '/stocks')
+  getCompanies = ():Observable<Company[]> => {        
+    return this.http.get<Company[]>(this.getUrlApiCompanies() + '/stocks')
       .pipe(        
         catchError(this.handleError('getCompanies',[]))
       )
@@ -41,7 +44,7 @@ export class ChartStocksService {
   }
 
   deleteCompany = (company: Company) : Observable<Company> => {    
-    const mUrl = this.urlApiCompanies + '/company/delete/' + company.code;    
+    const mUrl = this.getUrlApiCompanies() + '/company/delete/' + company.code;    
     return this.http.delete<Company>(mUrl)
       .pipe(
         catchError(this.handleError<Company>('Error deleting company'))
@@ -49,7 +52,7 @@ export class ChartStocksService {
   }
 
   addCompany = (company: Company) : Observable<Company> => {
-    const mUrl = this.urlApiCompanies + '/company/add';        
+    const mUrl = this.getUrlApiCompanies() + '/company/add';        
     return this.http.post<Company>(mUrl,company,httpOptions);
   }
 
