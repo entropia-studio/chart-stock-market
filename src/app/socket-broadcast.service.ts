@@ -22,6 +22,7 @@ export class SocketBroadcastService {
 			.pipe(				
 				map((response: MessageEvent): Message => {
 					let data = JSON.parse(response.data);					
+					console.log('data',data);
 					return {
 						action: data.action
 					}
