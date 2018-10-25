@@ -20,7 +20,7 @@ export class SocketBroadcastService {
   constructor(wsService: WebsocketService) {
 		
 		this.messages = <Subject<Message>>wsService
-      .connect(SOCKET_URL)        
+      .connect(this.getUrlWS())        
 			.pipe(				
 				map((response: MessageEvent): Message => {
 					let data = JSON.parse(response.data);					
@@ -30,5 +30,11 @@ export class SocketBroadcastService {
 				}),
 				catchError(error => of(null))
 			)   			
+	}
+	
+	getUrlWS = (): string => {
+		var SOCKET_URL = 'ws://' + location.hostname + ":4300";		
+    return SOCKET_URL;
   }
+
 }
