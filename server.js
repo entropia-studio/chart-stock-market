@@ -2,12 +2,22 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 const WebSocket = require('ws');
-const os = require('os');
 const wss = new WebSocket.Server({port: 4300});
-console.log('wss',wss)
+
 const path = require('path');
-
-
+/*
+wss.on('connection', function connection(ws) {
+  
+    ws.on('message', function incoming(message) {
+      console.log('received: %s', message);
+    });
+  
+    
+    console.log('connection');
+    ws.send('connection');
+  });
+*/
+  
 
 // Avoid CORS problems
 app.use(function(req, res, next) {
@@ -77,6 +87,8 @@ app.get('/*', function(req,res) {
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
+    console.log("data: ",data);
+    console.log("wss.clients: ",wss.clients)    
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
         client.send(data);
