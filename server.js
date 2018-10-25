@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 4300, domain: 'wss://entropia-chart-stock-market.herokuapp.com' });
+const os = require('os');
+const wss = new WebSocket.Server({port: 4300});
 console.log('wss',wss)
 const path = require('path');
 

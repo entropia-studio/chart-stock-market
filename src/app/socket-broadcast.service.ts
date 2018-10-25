@@ -4,8 +4,6 @@ import { WebsocketService } from './websocket.service';
 import { catchError, map } from "rxjs/operators";
 import { of } from "rxjs";
 
-const SOCKET_URL = 'ws://localhost:4300/';
-
 export interface Message {
 	action: string,	
 }
@@ -35,7 +33,8 @@ export class SocketBroadcastService {
 	getUrlWS = (): string => {				
 		var SOCKET_URL = location.hostname + ":4300";
 		SOCKET_URL = location.hostname === 'localhost' 
-			? 'ws://' + SOCKET_URL : 'wss://' + SOCKET_URL;			
+			? 'ws://' + SOCKET_URL : 'wss://' + SOCKET_URL;	
+					
     return SOCKET_URL;
   }
 
