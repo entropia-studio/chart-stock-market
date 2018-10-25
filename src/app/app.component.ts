@@ -19,7 +19,8 @@ export class AppComponent implements OnInit{
     private socketBroadcastService: SocketBroadcastService,    
   ) {
     socketBroadcastService.messages.subscribe((msg) => {
-      this.getCompanies();      
+      this.getCompanies();     
+      console.log("msg",msg) 
     });
   }
 
@@ -42,7 +43,7 @@ export class AppComponent implements OnInit{
     this.chartStocksService.addCompany(this.company)
       .subscribe(company => {
         this.companies.push(company);
-        this.socketBroadcastService.messages.next({"action": "add"});
+        //this.socketBroadcastService.messages.next({"action": "add"});
       });
   }
   
@@ -50,7 +51,7 @@ export class AppComponent implements OnInit{
     this.companies = this.companies.filter(c => c !== company);
     this.chartStocksService.deleteCompany(company)
     .subscribe(() => {
-      this.socketBroadcastService.messages.next({"action": "delete"});
+      //this.socketBroadcastService.messages.next({"action": "delete"});
     });    
   }
   setPeriod(period: string):void {
