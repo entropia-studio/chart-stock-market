@@ -32,8 +32,10 @@ export class SocketBroadcastService {
 			)   			
 	}
 	
-	getUrlWS = (): string => {
-		var SOCKET_URL = 'ws://' + location.hostname + ":4300";		
+	getUrlWS = (): string => {				
+		var SOCKET_URL = location.hostname + ":4300";
+		SOCKET_URL = location.hostname === 'localhost' 
+			? 'ws://' + SOCKET_URL : 'wss://' + SOCKET_URL;			
     return SOCKET_URL;
   }
 
