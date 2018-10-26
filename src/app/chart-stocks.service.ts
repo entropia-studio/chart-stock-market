@@ -27,7 +27,7 @@ export class ChartStocksService {
   
   getUrlApiCompanies = (): string => {
     var url_api = location.protocol + '//' + location.hostname;       
-    return location.hostname == 'localhost' ? url_api + ':8080/api'  : url_api + '/api';
+    return location.hostname == 'localhost' ? url_api + ':4300/api'  : url_api + '/api';
   }
 
   getCompanies = ():Observable<Company[]> => {        

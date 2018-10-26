@@ -32,11 +32,16 @@ export class SocketBroadcastService {
 	}
 	
 	getUrlWS = (): string => {				
-		var SOCKET_URL = location.hostname + ":4300";
+		//return location.origin.replace(/^http/, 'ws');
+		
+		
+		var SOCKET_URL = location.hostname;
+		
 		SOCKET_URL = location.hostname === 'localhost' 
-			? 'ws://' + SOCKET_URL : 'wss://' + SOCKET_URL;	
+			? 'ws://' + SOCKET_URL + ':4300' : 'wss://' + SOCKET_URL;	
 					
-    return SOCKET_URL;
+		return SOCKET_URL;
+		
   }
 
 }

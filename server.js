@@ -1,15 +1,22 @@
 const express = require('express');
+const http = require('http')
 const bodyParser = require('body-parser')
 const app = express();
-const SocketServer = require('ws').Server;
+const WebSocket = require('ws')
 
-const PORT = 4300;
+const port = process.env.PORT || 4300;
 
+const httpServer = http.createServer(app);
 
+/*
 const server = express()  
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+*/
 
-const wss = new SocketServer({server});
+
+const wss = new WebSocket.Server({
+    'server': httpServer
+})
 
 const path = require('path');
 /*
@@ -102,8 +109,8 @@ wss.broadcast = function broadcast(data) {
   };
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
-
+//app.listen(process.env.PORT || 8080);
+httpServer.listen(port);
 function handleError(err, response) {  
     response.status(500);  
     response.send(
