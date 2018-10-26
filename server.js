@@ -1,8 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({port: 4300});
+const SocketServer = require('ws').Server;
+
+const PORT = process.env.PORT || 4300;
+
+
+const server = express()  
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const wss = new SocketServer({server});
 
 const path = require('path');
 /*
@@ -88,11 +95,9 @@ app.get('/*', function(req,res) {
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
     console.log("data: ",data);
-    console.log("wss.clients: ",wss.clients)    
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
+    //console.log("wss.clients: ",wss.clients)    
+    wss.clients.forEach(function each(client) {      
+        client.send(data);      
     });
   };
 
