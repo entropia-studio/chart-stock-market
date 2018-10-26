@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const SocketServer = require('ws').Server;
 
-const PORT = process.env.PORT || 4300;
+const PORT = 4300;
 
 
 const server = express()  
