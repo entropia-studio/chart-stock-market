@@ -8,30 +8,11 @@ const port = process.env.PORT || 4300;
 
 const httpServer = http.createServer(app);
 
-/*
-const server = express()  
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-*/
-
-
 const wss = new WebSocket.Server({
     'server': httpServer
 })
 
 const path = require('path');
-/*
-wss.on('connection', function connection(ws) {
-  
-    ws.on('message', function incoming(message) {
-      console.log('received: %s', message);
-    });
-  
-    
-    console.log('connection');
-    ws.send('connection');
-  });
-*/
-  
 
 // Avoid CORS problems
 app.use(function(req, res, next) {
@@ -100,9 +81,7 @@ app.get('/*', function(req,res) {
 });
 
 // Broadcast to all.
-wss.broadcast = function broadcast(data) {
-    console.log("data: ",data);
-    //console.log("wss.clients: ",wss.clients)    
+wss.broadcast = function broadcast(data) {    
     wss.clients.forEach(function each(client) {      
         client.send(data);      
     });

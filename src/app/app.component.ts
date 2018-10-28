@@ -19,8 +19,7 @@ export class AppComponent implements OnInit{
     private socketBroadcastService: SocketBroadcastService,    
   ) {
     socketBroadcastService.messages.subscribe((msg) => {
-      this.getCompanies();     
-      console.log("msg",msg) 
+      this.getCompanies();           
     });
   }
 
