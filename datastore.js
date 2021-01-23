@@ -2,7 +2,7 @@ require('dotenv').config();
 const request = require('request');
 const mongoose = require('mongoose');
 
-var MONGODB_URI = 'mongodb://'+process.env.USER_DB+':'+process.env.PASS+'@'+process.env.HOST+':'+process.env.DB_PORT+'/'+process.env.DB;
+const MONGODB_URI = `mongodb+srv://${process.env.USER_DB}:${process.env.PASS}@${process.env.HOST}/${process.env.DB}?retryWrites=true&w=majority`;
 
 var companyStockSchema = mongoose.Schema({      
     name: {type: String, required: true, unique: true},
